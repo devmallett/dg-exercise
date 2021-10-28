@@ -1,9 +1,10 @@
 import requests
-from secrets import GORGIAS_URL 
-from secrets import GORGIAS_USER_ID 
-from secrets import GORGIAS_PASSWORD 
+from secrets import GORGIAS_TICKET_ID 
+from secrets import GORGIAS_CUSTOMER_ID 
+from secrets import GORGIAS_API 
+# from secrets import GORGIAS_ACCOUNT_EMAIL
         
-def makeRequest(ticket_id ,user_id ,text ,password):
+def makeRequest(ticket_id ,user_id ,message_text ,password):
     url = f"https://dmalzzzstore.gorgias.com/api/tickets/{ticket_id}/messages"
     
     payload = {
@@ -24,7 +25,7 @@ def makeRequest(ticket_id ,user_id ,text ,password):
                 },
                 "type": "email"
             },
-            "body_text": text,
+            "body_text": message_text,
             "from_agent": True,
             "channel": "email",
             "via": "api"
@@ -32,7 +33,7 @@ def makeRequest(ticket_id ,user_id ,text ,password):
     headers = {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": password
+            "Authorization": f"Basic {password}"
         }
         
         
@@ -46,5 +47,5 @@ def makeRequest(ticket_id ,user_id ,text ,password):
         
     
     
-print(makeRequest(GORGIAS_URL ,GORGIAS_USER_ID  ,"This is some rad stuff if it works" , GORGIAS_PASSWORD))
+print(makeRequest(GORGIAS_TICKET_ID ,GORGIAS_CUSTOMER_ID  ,"This is the newest test" , GORGIAS_API))
     
