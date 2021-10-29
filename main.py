@@ -8,6 +8,8 @@ from secrets import GORGIAS_STORE_NAME
 from secrets import GORGIAS_CUSTOMER_EMAIL
 
 
+
+
 class SendMessage:
     def __init__(self ,ticket_id ,customer_id ,customer_name ,api_key,store_name ,customer_email ,ticket_message): 
         self.ticket_id = ticket_id
@@ -40,6 +42,7 @@ class SendMessage:
     
     
     def make_request(self):
+        # pull_customer_id()
         
         url = f"https://{self.store_name}.gorgias.com/api/tickets/{self.ticket_id}/messages"
         
@@ -73,12 +76,8 @@ class SendMessage:
             "Authorization": f"Basic {self.api_key}"
         }
         response = requests.request("POST", url, json=payload, headers=self.header)
-        # print(url)
-        # print(payload)
-        # print(response.text)
-        # return (response.text)
         print(response.text)
-        # print(self.ticket_message)
+
 
 
 new_message = SendMessage(GORGIAS_TICKET_ID ,GORGIAS_CUSTOMER_ID , "Dmalzzzz" ,GORGIAS_API ,GORGIAS_STORE_NAME ,GORGIAS_CUSTOMER_EMAIL ,'This is with encoded api call')
